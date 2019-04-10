@@ -1,0 +1,7 @@
+
+.spyproject/codestyle.ini
+.spyproject/encoding.ini
+.spyproject/vcs.ini
+.spyproject/workspace.ini
+__pycache__/model.cpython-37.pyc
+__pycache__/view.cpython-37.pyc
