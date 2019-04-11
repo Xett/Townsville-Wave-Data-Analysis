@@ -4,6 +4,7 @@ The Controller module contains utilities to manage runtime hierarchy of objects.
 import wx
 import logging
 import datetime
+from events import EventManager
 from view import View
 from model import Model
 import os
@@ -14,7 +15,7 @@ class Controller(object):
     :param parent: The parent of the object
     :type parent: Object or None
     """
-    __slots__=('parent', 'view', 'model', 'dir', 'App', 'rootLogger', 'fileHandler', 'consoleHandler', 'formatter', 'directory', 'running')
+    __slots__=('parent', 'eventManager', 'view', 'model', 'dir', 'App', 'rootLogger', 'fileHandler', 'consoleHandler', 'formatter', 'directory', 'running')
     def __init__(self, parent=None):
         super().__init__()
         #:The parent object of the object
@@ -24,6 +25,18 @@ class Controller(object):
         self.parent=parent
         self.running=True
         self.directory=os.getcwd()
+        self.eventManager=EventManager()
+        self.eventManager.createNewEventId(2, 'Wavedata updated')
+        self.loggingInit()
+        self.view=View(self)
+        self.model=Model(self, self.directory)
+        self.view.windows[0].MainPanel.Controls[0].Bind(wx.EVT_BUTTON, self.model.preprocess)
+        self.eventManager.Bind('Wavedata updated', self.view.windows[0].updateWavedataListCtrl)
+        self.main()
+    def main(self):
+        while self.running:
+            self.App.MainLoop()
+    def loggingInit(self):
         self.rootLogger=logging.getLogger()
         self.formatter      =   logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         t                   =   datetime.datetime.now()
@@ -34,12 +47,6 @@ class Controller(object):
         self.consoleHandler.setFormatter(self.formatter)
         self.rootLogger.addHandler(self.consoleHandler)
         self.rootLogger.setLevel(logging.DEBUG)
-        self.view=View(self)
-        self.model=Model(self, self.directory)
-        self.main()
-    def main(self):
-        while self.running:
-            self.App.MainLoop()
     def log(self, msg, *args, **kw):
         """
         Wrapper function to manage logging
