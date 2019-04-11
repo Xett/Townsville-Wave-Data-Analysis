@@ -4,7 +4,6 @@ class Window(wx.Frame):
     """
     #
     """
-    __slots__=('controller', 'MenuBar', 'MainPanel', 'MainSizer', 'Panels', 'Sizers', 'menus', 'menuItems')
     def __init__(self, parent, id=-1, title="Window", pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.DEFAULT_FRAME_STYLE, name="Window"):
         super().__init__(parent, id, title, pos, size, style, name)
         self.menus=[]
@@ -14,8 +13,6 @@ class Window(wx.Frame):
         self.MenuBar=None
         self.MainSizer=None
         self.MainPanel=None
-        self.addSizer()
-        self.createPanel(self)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
     def createMenuBar(self, style=0):
         """
@@ -49,7 +46,7 @@ class Window(wx.Frame):
             self.MainPanel=panel
         else:
             self.Panels.append(panel)
-    def addSizer(self):
+    def createSizer(self):
         """
         #
         """
@@ -69,7 +66,6 @@ class Panel(wx.Panel):
     """
     #
     """
-    __slots__=('MainSizer', 'Panels', 'Controls')
     def __init__(self, parent, id=-1, pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.DEFAULT_FRAME_STYLE, name="Panel"):
         super().__init__(parent, id, pos, size, style, name)
         self.MainSizer=None

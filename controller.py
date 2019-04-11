@@ -30,8 +30,8 @@ class Controller(object):
         self.loggingInit()
         self.view=View(self)
         self.model=Model(self, self.directory)
-        self.view.windows[0].MainPanel.Controls[0].Bind(wx.EVT_BUTTON, self.model.preprocess)
-        self.eventManager.Bind('Wavedata updated', self.view.windows[0].updateWavedataListCtrl)
+        self.view.windows[0].ButtonPanel.Controls[0].Bind(wx.EVT_BUTTON, self.model.preprocess)
+        self.eventManager.Bind('Wavedata updated', self.view.windows[0].WavedataCtrl.update)
         self.main()
     def main(self):
         while self.running:
