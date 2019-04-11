@@ -17,6 +17,6 @@ class Model(object):
         #::rtype: Object or None
         self.controller=controller
         self.directory=directory
-    def preprocess(self):
+    def preprocess(self, evt):
         self.wavedata=pd.read_csv(self.directory+'/data files/townsville-wavedata-1975-2019.csv', low_memory=False)
-        self.controller.log(self.wavedata)
+        self.controller.eventManager.eventNotify('Wavedata updated')
