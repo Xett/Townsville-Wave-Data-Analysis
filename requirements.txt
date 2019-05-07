@@ -1,2 +1,1 @@
-git+https://github.com/Xett/wxpymvc@master#egg=wxpymvc
-wxpymvc
+wxpymvc==git+https://github.com/Xett/wxpymvc@master#egg=wxpymvc
