@@ -1,0 +1,1 @@
+git+git://github.com/Xett/wxpymvc@master#egg=wxpymvc
