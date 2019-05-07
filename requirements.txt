@@ -1,1 +1,1 @@
--e git+git://github.com/Xett/wxpymvc.git@master#egg=wxpymvc
+git+git://github.com/Xett/wxpymvc.git@master#egg=wxpymvc
