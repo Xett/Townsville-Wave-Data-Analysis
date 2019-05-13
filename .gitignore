@@ -6,3 +6,4 @@
 __pycache__/model.cpython-37.pyc
 __pycache__/view.cpython-37.pyc
 *.pyc
+.idea/*
